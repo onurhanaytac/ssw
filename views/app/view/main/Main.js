@@ -12,10 +12,8 @@ Ext.define('SSW.view.main.Main', {
     requires: [
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
-
-        'SSW.view.main.MainController',
-        'SSW.view.main.MainModel',
-        'SSW.view.main.List'
+        'SSW.controller.main.MainController',
+        'SSW.model.main.MainModel'
     ],
 
     controller: 'main',
@@ -80,7 +78,7 @@ Ext.define('SSW.view.main.Main', {
         iconCls: 'fa-home',
         // The following grid shares a store with the classic version's grid as well!
         items: [{
-            xtype: 'mainlist'
+            html: 'test'
         }]
     }, {
         title: 'Users',
