@@ -78,7 +78,7 @@ Ext.define('SSW.view.main.Main', {
         iconCls: 'fa-home',
         // The following grid shares a store with the classic version's grid as well!
         items: [{
-            html: 'test'
+            html: 'unset SSH_ASKPASS'
         }]
     }, {
         title: 'Users',
