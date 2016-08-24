@@ -15,7 +15,7 @@ Ext.define('SSW.controller.main.MainController', {
 
   onConfirm: function (choice) {
     if (choice === 'yes') {
-      console.log('Confirmed!')
+      console.log('Confirmed!!')
     }
   }
 });
