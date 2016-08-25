@@ -1,34 +1,72 @@
-
-/**
- * Module dependencies.
- */
-
+"use strict";
 var express = require('express');
-var routes = require('./routes');
-var http = require('http');
 var path = require('path');
-
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var util = require("util");
+var fs = require("fs");
+var _ = require("lodash");
 var app = express();
+var mongoose = require('mongoose');
+var config = require('./config');
+var http = require('http').Server(app);
 
-// all environments
-app.set('port', process.env.PORT || 3000);
+/* routes */
+var routes = require('./routes');
+var database = require('./routes/database');
+var user = require('./routes/user');
+/* end of routes */
+
+//view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
+// db connection
+mongoose.connect(config.database, function (err) {
+    if (err) {
+        throw err;
+    } else {
+        console.log("Succesfully connected to", config.database);
+    }
+});
 
+// routes
+app.use('/database', database);
+app.use('/user', user);
 app.get('/*', routes.index);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+//start tasks
+require('./tasks');
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
+
+
+module.exports = app;
