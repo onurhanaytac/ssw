@@ -1,7 +1,6 @@
 var UserModel = require('../models/user');
 
 exports.create = function (userObj, callback){
-    console.log('here');
     userObj.created_at = new Date();
     userObj.save(callback);
 }
