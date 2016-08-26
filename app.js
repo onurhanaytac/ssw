@@ -1,40 +1,38 @@
-"use strict";
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var util = require("util");
-var fs = require("fs");
-var _ = require("lodash");
-var app = express();
-var mongoose = require('mongoose');
-var config = require('./config');
-var http = require('http').Server(app);
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const util = require('util');
+const fs = require('fs');
+const _ = require('lodash');
+const app = express();
+const mongoose = require('mongoose');
+const config = require('./config');
 
 /* routes */
-var routes = require('./routes');
-var database = require('./routes/database');
-var user = require('./routes/user');
+const routes = require('./routes');
+const database = require('./routes/database');
+const user = require('./routes/user');
 /* end of routes */
 
-//view engine setup
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: false,
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // db connection
-mongoose.connect(config.database, function (err) {
+mongoose.connect(config.database, (err) => {
     if (err) {
         throw err;
     } else {
-        console.log("Succesfully connected to", config.database);
+        console.log('Succesfully connected to', config.database);
     }
 });
 
@@ -43,28 +41,28 @@ app.use('/database', database);
 app.use('/user', user);
 app.get('/*', routes.index);
 
-//start tasks
+// start tasks
 require('./tasks');
 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
+    app.use((err, req, res, next) => {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
-            error: err
+            error: err,
         });
     });
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
-        error: {}
+        error: {},
     });
 });
 
