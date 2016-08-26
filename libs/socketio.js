@@ -1,4 +1,3 @@
-
 exports.socketConnect = function socketConnect (socket) {
   console.log('A user connected');
 
@@ -9,7 +8,7 @@ exports.socketConnect = function socketConnect (socket) {
 }
 
 exports.socketDisconnect = function socketDisconnect () {
-  console.log('user disconnected');
+  console.log('User disconnected');
 }
 
 module.exports = exports;

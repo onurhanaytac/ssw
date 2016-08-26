@@ -2,7 +2,10 @@ Ext.define('extApp.controller.chat.ChatController', {
 	extend: 'Ext.app.ViewController',
 	alias: 'controller.ChatController',
 
+  socket: io(),
+
   onButtonClickSend: function (button, e, eOpts) {
+    var me = this;
     var messageBox = Ext.ComponentQuery.query('#messageBox')[0];
     var message = messageBox.getValue()
     if (message == '') {
@@ -10,17 +13,17 @@ Ext.define('extApp.controller.chat.ChatController', {
     }
     messageBox.setValue('');
 
-    var socket = io();
-    socket.emit('chat message', message);
+    me.socket.emit('chat message', message);
 
-    socket.on('chat message', function(msg) {
-      console.log(msg)
-    });
   },
 
   init: function () {
     var me = this;
-    var socket = io();
+    var messageZone = Ext.ComponentQuery.query('#MessageZone')[0];
+
+    me.socket.on('chat message', function(msg) {
+      messageZone.setTitle(msg);
+    });
 
     me.control({
       'textfield': {
