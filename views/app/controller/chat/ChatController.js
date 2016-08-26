@@ -8,13 +8,13 @@ Ext.define('extApp.controller.chat.ChatController', {
     var me = this;
     var messageBox = Ext.ComponentQuery.query('#messageBox')[0];
     var message = messageBox.getValue()
-    if (message == '') {
+
+		if (message == '') {
       return;
-    }
+		}
+
     messageBox.setValue('');
-
     me.socket.emit('chat message', message);
-
   },
 
   init: function () {

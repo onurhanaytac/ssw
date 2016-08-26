@@ -1,8 +1,14 @@
+var sockets = [];
+
 exports.socketConnect = function socketConnect (socket) {
   console.log('A user connected');
 
-  socket.on('chat message', function (msg) {
-    socket.emit('chat message', msg);
+  sockets.push(socket);
+
+  socket.on('chat message', function(data) {
+    sockets.forEach(function(soc) {
+      soc.emit('chat message', data);
+    });
   });
 
 }
