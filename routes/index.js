@@ -10,7 +10,6 @@ exports.index = function(req, res){
   var file = req.params[0] ? req.params[0] : 'index.html';
 
   var staticPath = 'views';
-
   fs.readFile(path.join( __dirname, '..', staticPath, file), function(err, data) {
 
     res.set('Cache-Control', 'public,max-age=900,s-maxage=900');
