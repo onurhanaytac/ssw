@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'SSW' );
-$image-search-path: '/home/okan/Documents/ssw/views/build/production/SSW/resources';
+$image-search-path: '/home/localadmin/gitCodes/SSW/views/build/production/SSW/resources';
 $theme-name:  dynamic( 'theme-triton' );
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
@@ -1120,9 +1120,9 @@ $include-ext-window-window: dynamic(true);;
 $include-ssw-application: dynamic(true);;
 $include-ssw-controller-main-maincontroller: dynamic(true);;
 $include-ssw-model-main-mainmodel: dynamic(true);;
-$include-ssw-store-personnel: dynamic(true);;
-$include-ssw-view-main-list: dynamic(true);;
+$include-ssw-view-chat-chat: dynamic(true);;
 $include-ssw-view-main-main: dynamic(true);;
+$include-extapp-controller-chat-chatcontroller: dynamic(true);;
 
 
 /* ======================== ETC ======================== */

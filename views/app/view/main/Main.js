@@ -13,7 +13,8 @@ Ext.define('SSW.view.main.Main', {
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
         'SSW.controller.main.MainController',
-        'SSW.model.main.MainModel'
+        'SSW.model.main.MainModel',
+        'SSW.view.chat.Chat'
     ],
 
     controller: 'main',
@@ -83,15 +84,14 @@ Ext.define('SSW.view.main.Main', {
     }, {
         title: 'Users',
         iconCls: 'fa-user',
-        bind: {
-            html: '{loremIpsum}'
-        }
+        xtype: ''
     }, {
         title: 'Groups',
         iconCls: 'fa-users',
-        bind: {
-            html: '{loremIpsum}'
-        }
+        layout: 'fit',
+        items: [{
+          xtype: 'ssw-chat'
+        }]
     }, {
         title: 'Settings',
         iconCls: 'fa-cog',

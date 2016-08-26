@@ -1,2 +1,2 @@
 // @tag full-page
-// @require /home/okan/Documents/ssw/views/app.js
+// @require /home/localadmin/gitCodes/SSW/views/app.js

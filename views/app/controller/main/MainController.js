@@ -17,5 +17,11 @@ Ext.define('SSW.controller.main.MainController', {
     if (choice === 'yes') {
       console.log('Confirmed!')
     }
+  },
+
+  init: function () {
+    var me = this;
+
+
   }
 });

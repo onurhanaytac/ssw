@@ -10,6 +10,9 @@ const app = express();
 const mongoose = require('mongoose');
 const config = require('./config');
 
+
+const favicon = require('static-favicon');
+
 /* routes */
 const routes = require('./routes');
 const database = require('./routes/database');
@@ -46,14 +49,6 @@ app.get('/*', routes.index);
  * Socket io connection
  * @type {String}
  */
-io.on('connection', function (socket) {
-  socket.emit('news', {
-    hello: 'world'
-  });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
 
 //start tasks
 require('./tasks');
