@@ -11,6 +11,8 @@ var app = express();
 var mongoose = require('mongoose');
 var config = require('./config');
 var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var favicon = require('static-favicon');
 
 /* routes */
 var routes = require('./routes');
@@ -21,7 +23,8 @@ var user = require('./routes/user');
 //view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(logger('dev'));
+// app.use(logger('dev'));
+app.use(favicon());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
@@ -42,6 +45,19 @@ mongoose.connect(config.database, function (err) {
 app.use('/database', database);
 app.use('/user', user);
 app.get('/*', routes.index);
+
+/**
+ * Socket io connection
+ * @type {String}
+ */
+io.on('connection', function (socket) {
+  socket.emit('news', {
+    hello: 'world'
+  });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
 
 //start tasks
 require('./tasks');
