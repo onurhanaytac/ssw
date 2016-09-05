@@ -26,18 +26,18 @@ app.set('view engine', 'jade');
 app.use(favicon());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+  extended: false
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // db connection
-mongoose.connect(config.database, (err) => {
-    if (err) {
-        throw err;
-    } else {
-        console.log('Succesfully connected to', config.database);
-    }
+mongoose.connect(config.database, err => {
+  if (err) {
+    throw err;
+  } else {
+    console.log('Succesfully connected to', config.database);
+  }
 });
 
 // routes
@@ -50,29 +50,29 @@ app.get('/*', routes.index);
  * @type {String}
  */
 
-//start tasks
+// start tasks
 require('./tasks');
 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use((err, req, res, next) => {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+  app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
     });
+  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 

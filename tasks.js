@@ -1,5 +1,5 @@
-var cronJob = require('cron').CronJob;
+var CronJob = require('cron').CronJob;
 
 // Collect Job every 60 seconds
 var collect = require('./tasks/collect');
-new cronJob('*/59 * * * * *', collect).start();
+new CronJob('*/59 * * * * *', collect).start();

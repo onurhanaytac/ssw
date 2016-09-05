@@ -1,11 +1,6 @@
 module.exports = {
-    "extends": "airbnb",
-    "plugins": [
-        "react",
-        "jsx-a11y",
-        "import"
-    ],
-    "rules":{
-        "indent": [2,4]
+    "extends": "google",
+    "rules": {
+        "space-before-function-paren": ["error",  { "anonymous": "always", "named": "never" }]
     }
 };
